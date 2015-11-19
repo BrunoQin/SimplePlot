@@ -24,16 +24,10 @@
     <ClInclude Include="coordinate.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="stack.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="stack_num.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="calculate.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="TCHAR2STRING.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="cal.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

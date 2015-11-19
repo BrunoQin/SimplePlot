@@ -147,11 +147,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="calculate.h" />
+    <ClInclude Include="cal.h" />
     <ClInclude Include="coordinate.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="stack.h" />
-    <ClInclude Include="stack_num.h" />
     <ClInclude Include="TCHAR2STRING.h" />
     <ClInclude Include="view.h" />
   </ItemGroup>

@@ -1,22 +1,12 @@
-﻿生成启动时间为 2015/11/19 22:05:39。
+﻿生成启动时间为 2015/11/20 0:45:35。
      1>项目“C:\Users\Bruno\Desktop\SimplePlot 2 2\SimplePlot 2 2\SimplePlot\SimplePlot.vcxproj”在节点 2 上(Build 个目标)。
      1>ClCompile:
          C:\Tools\vs2015\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt "源.cpp"
          源.cpp
-     1>c:\users\bruno\desktop\simpleplot 2 2\simpleplot 2 2\simpleplot\calculate.h(73): warning C4018: “<”: 有符号/无符号不匹配
-     1>c:\users\bruno\desktop\simpleplot 2 2\simpleplot 2 2\simpleplot\calculate.h(81): warning C4305: “=”: 从“double”到“float”截断
-     1>c:\users\bruno\desktop\simpleplot 2 2\simpleplot 2 2\simpleplot\calculate.h(87): warning C4305: “=”: 从“double”到“float”截断
-     1>c:\users\bruno\desktop\simpleplot 2 2\simpleplot 2 2\simpleplot\calculate.h(93): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-     1>c:\users\bruno\desktop\simpleplot 2 2\simpleplot 2 2\simpleplot\calculate.h(99): warning C4244: “=”: 从“int”转换到“float”，可能丢失数据
-     1>c:\users\bruno\desktop\simpleplot 2 2\simpleplot 2 2\simpleplot\calculate.h(106): warning C4244: “初始化”: 从“int”转换到“float”，可能丢失数据
-     1>c:\users\bruno\desktop\simpleplot 2 2\simpleplot 2 2\simpleplot\calculate.h(123): warning C4244: “初始化”: 从“int”转换到“float”，可能丢失数据
-     1>c:\users\bruno\desktop\simpleplot 2 2\simpleplot 2 2\simpleplot\calculate.h(146): warning C4806: “==”: 不安全操作: 从类型“bool”提升到类型“int”的值不能等于给定的常量
-     1>c:\users\bruno\desktop\simpleplot 2 2\simpleplot 2 2\simpleplot\calculate.h(290): warning C4244: “参数”: 从“long double”转换到“const float”，可能丢失数据
-     1>c:\users\bruno\desktop\simpleplot 2 2\simpleplot 2 2\simpleplot\calculate.h(333): warning C4244: “参数”: 从“long double”转换到“const float”，可能丢失数据
-     1>c:\users\bruno\desktop\simpleplot 2 2\simpleplot 2 2\simpleplot\coordinate.h(55): warning C4244: “=”: 从“double”转换到“LONG”，可能丢失数据
-     1>c:\users\bruno\desktop\simpleplot 2 2\simpleplot 2 2\simpleplot\coordinate.h(56): warning C4244: “=”: 从“double”转换到“LONG”，可能丢失数据
-     1>c:\users\bruno\desktop\simpleplot 2 2\simpleplot 2 2\simpleplot\coordinate.h(48): warning C4101: “result”: 未引用的局部变量
-     1>c:\users\bruno\desktop\simpleplot 2 2\simpleplot 2 2\simpleplot\源.cpp(75): warning C4101: “hButton”: 未引用的局部变量
+     1>c:\users\bruno\desktop\simpleplot 2 2\simpleplot 2 2\simpleplot\coordinate.h(62): warning C4244: “=”: 从“double”转换到“LONG”，可能丢失数据
+     1>c:\users\bruno\desktop\simpleplot 2 2\simpleplot 2 2\simpleplot\coordinate.h(63): warning C4244: “=”: 从“double”转换到“LONG”，可能丢失数据
+     1>c:\users\bruno\desktop\simpleplot 2 2\simpleplot 2 2\simpleplot\coordinate.h(51): warning C4101: “result”: 未引用的局部变量
+     1>c:\users\bruno\desktop\simpleplot 2 2\simpleplot 2 2\simpleplot\源.cpp(81): warning C4101: “hButton”: 未引用的局部变量
        Link:
          C:\Tools\vs2015\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Bruno\Desktop\SimplePlot 2 2\SimplePlot 2 2\Debug\SimplePlot.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\Users\Bruno\Desktop\SimplePlot 2 2\SimplePlot 2 2\Debug\SimplePlot.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Bruno\Desktop\SimplePlot 2 2\SimplePlot 2 2\Debug\SimplePlot.lib" /MACHINE:X86 Debug\SimplePlot.res
          "Debug\源.obj"
@@ -25,4 +15,4 @@
 
 已成功生成。
 
-已用时间 00:00:01.42
+已用时间 00:00:01.12

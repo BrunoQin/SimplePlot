@@ -17,6 +17,8 @@ WNDPROC OldProc[3];
 int idFocus;
 BOOL exist[] = { false, false, false, false, false, false };
 string funcStr[] = { "", "" ,"", "", "", "" };
+string s;
+string e;
 BOOL CALLBACK DiaProc(HWND, UINT, WPARAM, LPARAM);
 LRESULT CALLBACK ScrollProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
 
@@ -56,6 +58,8 @@ BOOL CALLBACK DiaProc(HWND hwnd, UINT message,
 	static HWND hWndClear_5;
 	static HWND hWndClear_6;
 	static HWND hWndClearAll;
+	static HWND hWndStart;
+	static HWND hWndEnd;
 
 	PAINTSTRUCT ps;
 
@@ -70,6 +74,8 @@ BOOL CALLBACK DiaProc(HWND hwnd, UINT message,
 	static int			cyChar, iColor[3];
 	TCHAR				*szColorName[3] = { L"Red",L"Green",L"Blue" };
 	TCHAR func[255];
+	TCHAR myStart[100];
+	TCHAR myEnd[100];
 
 
 	HWND hButton;
@@ -129,6 +135,7 @@ BOOL CALLBACK DiaProc(HWND hwnd, UINT message,
 		SetWindowText(hValue[i], szBuffer);
 
 		DeleteObject((HBRUSH)SetClassLong(hwnd, GCL_HBRBACKGROUND, (LONG)CreateSolidBrush(RGB(iColor[0], iColor[1], iColor[2]))));
+		setFunc(view, funcStr, exist, s, e, iColor);
 		InvalidateRect(hwnd, &mrect, TRUE);
 		return 0;
 
@@ -173,6 +180,9 @@ BOOL CALLBACK DiaProc(HWND hwnd, UINT message,
 		hWndClear_5 = GetDlgItem(hwnd, IDC_BUTTON10);
 		hWndClear_6 = GetDlgItem(hwnd, IDC_BUTTON12);
 		hWndClearAll = GetDlgItem(hwnd, IDC_BUTTON13);
+		hWndStart = GetDlgItem(hwnd, IDC_EDIT2);
+		hWndEnd = GetDlgItem(hwnd, IDC_EDIT3);
+
 
 		SendDlgItemMessage(hwnd, IDC_COMBO1, CB_ADDSTRING, 0, (LPARAM)"RED");
 		SendDlgItemMessage(hwnd, IDC_COMBO1, CB_ADDSTRING, 1, (LPARAM)"GREEN");
@@ -187,8 +197,6 @@ BOOL CALLBACK DiaProc(HWND hwnd, UINT message,
 
 		SetRect(&mrect, 160, 380, 260, 480);
 
-		
-
 		for (i = 0; i<3; i++)
 		{
 			hScroll[i] = CreateWindow(L"scrollbar",
@@ -200,8 +208,8 @@ BOOL CALLBACK DiaProc(HWND hwnd, UINT message,
 				hInst,
 				NULL);
 
-			SetScrollRange(hScroll[i], SB_CTL, 0, 255, FALSE);
-			SetScrollPos(hScroll[i], SB_CTL, 0, FALSE);
+			SetScrollRange(hScroll[i], SB_CTL, 0,255, FALSE);
+			SetScrollPos(hScroll[i], SB_CTL, 255, FALSE);
 
 			hLabel[i] = CreateWindow(L"static",
 				szColorName[i],
@@ -237,80 +245,110 @@ BOOL CALLBACK DiaProc(HWND hwnd, UINT message,
 		{
 		case IDC_BUTTON1:
 			SendMessage(hWndEdit_1, WM_GETTEXT, 255, (LPARAM)func);
+			SendMessage(hWndStart, WM_GETTEXT, 255, (LPARAM)myStart);
+			SendMessage(hWndEnd, WM_GETTEXT, 255, (LPARAM)myEnd);
 			funcStr[0] = TCHAR2STRING(func);
+			s = TCHAR2STRING(myStart);
+			e = TCHAR2STRING(myEnd);
+
 			exist[0] = true;
-			setFunc(view, funcStr, exist);
+			setFunc(view, funcStr, exist, s, e, iColor);
 			SetFocus(view);
 			break;
 		case IDC_BUTTON3:
 			SendMessage(hWndEdit_2, WM_GETTEXT, 255, (LPARAM)func);
+			SendMessage(hWndStart, WM_GETTEXT, 255, (LPARAM)myStart);
+			SendMessage(hWndEnd, WM_GETTEXT, 255, (LPARAM)myEnd);
 			funcStr[1] = TCHAR2STRING(func);
+			s = TCHAR2STRING(myStart);
+			e = TCHAR2STRING(myEnd);
+
 			exist[1] = true;
-			setFunc(view, funcStr, exist);
+			setFunc(view, funcStr, exist, s, e, iColor);
 			SetFocus(view);
 			break;
 		case IDC_BUTTON5:
 			SendMessage(hWndEdit_3, WM_GETTEXT, 255, (LPARAM)func);
+			SendMessage(hWndStart, WM_GETTEXT, 255, (LPARAM)myStart);
+			SendMessage(hWndEnd, WM_GETTEXT, 255, (LPARAM)myEnd);
 			funcStr[2] = TCHAR2STRING(func);
+			s = TCHAR2STRING(myStart);
+			e = TCHAR2STRING(myEnd);
+
 			exist[2] = true;
-			setFunc(view, funcStr, exist);
+			setFunc(view, funcStr, exist, s, e, iColor);
 			SetFocus(view);
 			break;
 		case IDC_BUTTON7:
 			SendMessage(hWndEdit_4, WM_GETTEXT, 255, (LPARAM)func);
+			SendMessage(hWndStart, WM_GETTEXT, 255, (LPARAM)myStart);
+			SendMessage(hWndEnd, WM_GETTEXT, 255, (LPARAM)myEnd);
 			funcStr[3] = TCHAR2STRING(func);
+			s = TCHAR2STRING(myStart);
+			e = TCHAR2STRING(myEnd);
+
 			exist[3] = true;
-			setFunc(view, funcStr, exist);
+			setFunc(view, funcStr, exist, s, e, iColor);
 			SetFocus(view);
 			break;
 		case IDC_BUTTON9:
 			SendMessage(hWndEdit_5, WM_GETTEXT, 255, (LPARAM)func);
+			SendMessage(hWndStart, WM_GETTEXT, 255, (LPARAM)myStart);
+			SendMessage(hWndEnd, WM_GETTEXT, 255, (LPARAM)myEnd);
 			funcStr[4] = TCHAR2STRING(func);
+			s = TCHAR2STRING(myStart);
+			e = TCHAR2STRING(myEnd);
+
 			exist[4] = true;
-			setFunc(view, funcStr, exist);
+			setFunc(view, funcStr, exist, s, e, iColor);
 			SetFocus(view);
 			break;
 		case IDC_BUTTON11:
 			SendMessage(hWndEdit_6, WM_GETTEXT, 255, (LPARAM)func);
+			SendMessage(hWndStart, WM_GETTEXT, 255, (LPARAM)myStart);
+			SendMessage(hWndEnd, WM_GETTEXT, 255, (LPARAM)myEnd);
 			funcStr[5] = TCHAR2STRING(func);
+			s = TCHAR2STRING(myStart);
+			e = TCHAR2STRING(myEnd);
+
 			exist[5] = true;
-			setFunc(view, funcStr, exist);
+			setFunc(view, funcStr, exist, s, e, iColor);
 			SetFocus(view);
 			break;
 		case IDC_BUTTON2:
 			funcStr[0] = "";
 			exist[0] = false;
-			setFunc(view, funcStr, exist);
+			setFunc(view, funcStr, exist, s, e, iColor);
 			SetFocus(view);
 			break;
 		case IDC_BUTTON4:
 			funcStr[1] = "";
 			exist[1] = false;
-			setFunc(view, funcStr, exist);
+			setFunc(view, funcStr, exist, s, e, iColor);
 			SetFocus(view);
 			break;
 		case IDC_BUTTON6:
 			funcStr[2] = "";
 			exist[2] = false;
-			setFunc(view, funcStr, exist);
+			setFunc(view, funcStr, exist, s, e, iColor);
 			SetFocus(view);
 			break;
 		case IDC_BUTTON8:
 			funcStr[3] = "";
 			exist[3] = false;
-			setFunc(view, funcStr, exist);
+			setFunc(view, funcStr, exist, s, e, iColor);
 			SetFocus(view);
 			break;
 		case IDC_BUTTON10:
 			funcStr[4] = "";
 			exist[4] = false;
-			setFunc(view, funcStr, exist);
+			setFunc(view, funcStr, exist, s, e, iColor);
 			SetFocus(view);
 			break;
 		case IDC_BUTTON12:
 			funcStr[5] = "";
 			exist[5] = false;
-			setFunc(view, funcStr, exist);
+			setFunc(view, funcStr, exist, s, e, iColor);
 			SetFocus(view);
 			break;
 		case IDC_BUTTON13:
@@ -326,7 +364,7 @@ BOOL CALLBACK DiaProc(HWND hwnd, UINT message,
 			exist[5] = false;
 			exist[5] = false;
 			exist[5] = false;
-			setFunc(view, funcStr, exist);
+			setFunc(view, funcStr, exist, s, e,iColor);
 			SetFocus(view);
 			break;
 		}

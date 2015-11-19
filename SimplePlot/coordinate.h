@@ -2,7 +2,7 @@
 #include <windows.h>
 #include <string>
 
-#include "calculate.h"
+#include "cal.h"
 
 void RVS_drawLine_width(HDC hDC, int x1, int y1, int x2, int y2, COLORREF color);
 
@@ -10,54 +10,62 @@ void createCoordinate(HDC hdc, int sx, int sy, int tick) {
 
 	HPEN pen = CreatePen(PS_SOLID, 1, RGB(190, 190, 190));
 	HPEN old = (HPEN)SelectObject(hdc, pen);
+	int tem = 10000 / tick * tick;
 
-	for (int i = -10000; i < 10000; i = i + tick) {
+	for (int i = -tem; i < tem; i = i + tick) {
 		if (i == 0) {
 			pen = CreatePen(PS_SOLID, 1, RGB(0, 0, 255));
 			old = (HPEN)SelectObject(hdc, pen);
-			MoveToEx(hdc, -20000, sy - i * 2, NULL);
-			LineTo(hdc, 20000, sy - i * 2);
+			MoveToEx(hdc, -tem, sy - i * 2, NULL);
+			LineTo(hdc, tem, sy - i * 2);
 			pen = CreatePen(PS_SOLID, 1, RGB(190, 190, 190));
 			old = (HPEN)SelectObject(hdc, pen);
 			continue;
 		}
-		MoveToEx(hdc, -20000, sy - i * 2, NULL);
-		LineTo(hdc, 20000, sy - i * 2);
+		MoveToEx(hdc, -tem, sy - i * 2, NULL);
+		LineTo(hdc, tem, sy - i * 2);
 	}
 
-	for (int i = -10000; i < 10000; i = i + tick) {
+	for (int i = -tem; i < tem; i = i + tick) {
 		if (i == 0) {
 			pen = CreatePen(PS_SOLID, 1, RGB(0, 0, 255));
 			old = (HPEN)SelectObject(hdc, pen);
-			MoveToEx(hdc, sx - i * 2, -20000, NULL);
-			LineTo(hdc, sx - i * 2, 20000);
+			MoveToEx(hdc, sx - i * 2, -tem, NULL);
+			LineTo(hdc, sx - i * 2, tem);
 			pen = CreatePen(PS_SOLID, 1, RGB(190, 190, 190));
 			old = (HPEN)SelectObject(hdc, pen);
 			continue;
 		}
-		MoveToEx(hdc, sx - i * 2, -20000, NULL);
-		LineTo(hdc, sx - i * 2, 20000);
+		MoveToEx(hdc, sx - i * 2, -tem, NULL);
+		LineTo(hdc, sx - i * 2, tem);
 	}
 
 
 }
 
-void drawfunc(HDC hdc, int sx, int sy, int tick, string funcStr, BOOL exist, int R, int G, int B) {
+void drawfunc(HDC hdc, int sx, int sy, int tick, string funcStr, BOOL exist, int R, int G, int B, int start, int end) {
 
 	if (exist) {
+		int myStart = start * tick;
+		int myEnd = end * tick;
 		double result;
-		POINT           apt[800];
+		int n = myStart - myEnd;
+		POINT  apt[20000];
+		char strtem[300];
 		double ex;
+		int points = 0;
+		strcpy_s(strtem, funcStr.c_str());
 
-		for (int i = 0; i < 800; i++) {
-			calculate *c = new calculate();
-			ex = i / tick;
-			apt[i].x =tick * ex + sx;
-			apt[i].y = -10 * tick * c -> cal(funcStr, ex / 10) + sy;
-			delete(c);
+		for (int i = -10000; i < 10000; i++) {
+			if (i >= myStart && i <= myEnd) {
+				ex = i / tick;
+				apt[points].x = tick * ex + sx;
+				apt[points].y = -10 * tick * calculate(ex / 10, strtem, strlen(strtem) + 1) + sy;
+				points++;
+			}
 		}
 		//Polyline(hdc, apt, 200);
-		for (int j = 0; j < 799; j++) {
+		for (int j = 0; j < points - 1; j++) {
 			RVS_drawLine_width(hdc, apt[j].x, apt[j].y, apt[j + 1].x, apt[j + 1].y, RGB(R, G, B));
 		}
 	}

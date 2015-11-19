@@ -3,6 +3,7 @@
 #include <windows.h> 
 #include <tchar.h>
 #include <string>
+#include <cstdlib>
 #include "coordinate.h"
 
 TCHAR szClassName[] = _T("Customt_control_12345");
@@ -18,6 +19,10 @@ BOOL myExist[6];
 string myFuncStr[6];
 int tick = 20;
 string myFuncString[6];
+string myStart;
+string myEnd;
+int st = 0, en = 0;
+int myColor[] = { 255, 255, 255 };
 
 
 LRESULT CALLBACK Custom_Control_WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
@@ -148,17 +153,17 @@ LRESULT CALLBACK Custom_Control_WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPAR
 
 		hdc = BeginPaint(hwnd, &ps);
 
-		hBrush = CreateSolidBrush(RGB(255, 255, 255));
+		hBrush = CreateSolidBrush(RGB(myColor[0], myColor[1], myColor[2]));
 		GetClientRect(hwnd, &rect);
 		FillRect(hDCMem, &rect, hBrush);  //用画刷把位图清除干净
 
 		createCoordinate(hDCMem, source.x, source.y, tick);
-		drawfunc(hDCMem, source.x, source.y, tick, myFuncStr[0], myExist[0], 255, 0, 0);
-		drawfunc(hDCMem, source.x, source.y, tick, myFuncStr[1], myExist[1], 0, 255, 0);
-		drawfunc(hDCMem, source.x, source.y, tick, myFuncStr[2], myExist[2], 0, 0, 255);
-		drawfunc(hDCMem, source.x, source.y, tick, myFuncStr[3], myExist[3], 255, 255, 0);
-		drawfunc(hDCMem, source.x, source.y, tick, myFuncStr[4], myExist[4], 0, 255, 255);
-		drawfunc(hDCMem, source.x, source.y, tick, myFuncStr[5], myExist[5], 255, 0, 255);
+		drawfunc(hDCMem, source.x, source.y, tick, myFuncStr[0], myExist[0], 255, 0, 0, st, en);
+		drawfunc(hDCMem, source.x, source.y, tick, myFuncStr[1], myExist[1], 0, 255, 0, st, en);
+		drawfunc(hDCMem, source.x, source.y, tick, myFuncStr[2], myExist[2], 0, 0, 255, st, en);
+		drawfunc(hDCMem, source.x, source.y, tick, myFuncStr[3], myExist[3], 255, 255, 0, st, en);
+		drawfunc(hDCMem, source.x, source.y, tick, myFuncStr[4], myExist[4], 0, 255, 255, st, en);
+		drawfunc(hDCMem, source.x, source.y, tick, myFuncStr[5], myExist[5], 255, 0, 255, st, en);
 
 		BitBlt(hdc, 0, 0, rect.right - rect.left, rect.bottom - rect.top, hDCMem, 0, 0, SRCCOPY);		/* 将双缓冲区图像复制到显示缓冲区 */
 		DeleteObject(hBrush);
@@ -196,13 +201,20 @@ HWND CreateCustomControlFunc(HWND hwndParent, int x, int y, int width, int heigh
 	return hwndCtrl;
 }
 
-void setFunc(HWND hwnd, string funcString[6], BOOL exist[6]) {
+void setFunc(HWND hwnd, string funcString[6], BOOL exist[6], string start, string end, int color[3]) {
 	myFuncStr[0] = funcString[0]; myExist[0] = exist[0];
 	myFuncStr[1] = funcString[1]; myExist[1] = exist[1];
 	myFuncStr[2] = funcString[2]; myExist[2] = exist[2];
 	myFuncStr[3] = funcString[3]; myExist[3] = exist[3];
 	myFuncStr[4] = funcString[4]; myExist[4] = exist[4];
 	myFuncStr[5] = funcString[5]; myExist[5] = exist[5];
+	myStart = start;
+	myEnd = end;
+	st = std::atoi(myStart.c_str());
+	en = std::atoi(myEnd.c_str());
+	myColor[0] = color[0];
+	myColor[1] = color[1];
+	myColor[2] = color[2];
 	InvalidateRect(hwnd, NULL, false);
 }
 
