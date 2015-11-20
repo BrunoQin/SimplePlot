@@ -30,6 +30,9 @@
     <ClInclude Include="cal.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="save.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SimplePlot.rc">

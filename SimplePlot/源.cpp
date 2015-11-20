@@ -6,6 +6,7 @@
 #include "resource.h"
 #include "view.h"
 #include "TCHAR2STRING.h"
+#include "save.h"
 
 const double pi = 3.1415926535;
 
@@ -60,8 +61,11 @@ BOOL CALLBACK DiaProc(HWND hwnd, UINT message,
 	static HWND hWndClearAll;
 	static HWND hWndStart;
 	static HWND hWndEnd;
+	static HWND hWndSave;
+	static HWND hWndLoad;
 
 	PAINTSTRUCT ps;
+	PBITMAPINFO my;
 
 	COLORREF			rcPrim[3] = { RGB(255,0,0),RGB(0,255,0),RGB(0,0,255) };					
 	int					i;
@@ -182,6 +186,8 @@ BOOL CALLBACK DiaProc(HWND hwnd, UINT message,
 		hWndClearAll = GetDlgItem(hwnd, IDC_BUTTON13);
 		hWndStart = GetDlgItem(hwnd, IDC_EDIT2);
 		hWndEnd = GetDlgItem(hwnd, IDC_EDIT3);
+		hWndSave = GetDlgItem(hwnd, IDC_BUTTON14);
+		hWndLoad = GetDlgItem(hwnd, IDC_BUTTON15);
 
 
 		SendDlgItemMessage(hwnd, IDC_COMBO1, CB_ADDSTRING, 0, (LPARAM)"RED");
@@ -366,6 +372,12 @@ BOOL CALLBACK DiaProc(HWND hwnd, UINT message,
 			exist[5] = false;
 			setFunc(view, funcStr, exist, s, e,iColor);
 			SetFocus(view);
+			break;
+		case IDC_BUTTON14:
+			SendMessage(view, 10000, NULL, NULL);
+			break;
+		case IDC_BUTTON15:
+			SendMessage(view, 10001, NULL, NULL);
 			break;
 		}
 

@@ -5,6 +5,7 @@
 #include <string>
 #include <cstdlib>
 #include "coordinate.h"
+#include "save.h"
 
 TCHAR szClassName[] = _T("Customt_control_12345");
 int state = 0;
@@ -74,6 +75,7 @@ LRESULT CALLBACK Custom_Control_WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPAR
 
 	HDC hdc;
 	PAINTSTRUCT ps;
+	PBITMAPINFO tem = 0;
 
 	int x = 0, y = 0;
 
@@ -170,6 +172,30 @@ LRESULT CALLBACK Custom_Control_WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPAR
 
 		EndPaint(hwnd, &ps);
 
+		break;
+
+	case 10000:
+		tem = CreateBitmapInfoStruct(hwnd, hBmpMem);
+		CreateBMPFile(hwnd, L"tem.bmp", tem, hBmpMem, hDCMem);
+		break;
+
+	case 10001:
+		HBITMAP hbmp;   //一张位图的句柄 
+		BITMAP bmp;
+		HDC hdcMem;
+
+		hdc = GetDC(hwnd);
+		hdcMem = CreateCompatibleDC(hdc);  //创建一个与指定设备兼容的内存设备上下文环境  
+		hbmp = (HBITMAP)LoadImage(NULL, L"tem.bpm", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE | LR_CREATEDIBSECTION);
+		GetObject(hbmp, sizeof(BITMAP), &bmp);  //得到一个位图对象  
+
+		SelectObject(hdcMem, hbmp);
+		BitBlt(hdc, 0, 0, bmp.bmWidth, bmp.bmHeight, hdcMem, 0, 0, SRCCOPY);        //显示位图  
+
+		DeleteDC(hdcMem);
+		DeleteObject(hbmp);
+
+		EndPaint(hwnd, &ps);
 		break;
 
 	case WM_DESTROY: //当窗口关闭时产生的原因

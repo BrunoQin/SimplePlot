@@ -150,6 +150,7 @@
     <ClInclude Include="cal.h" />
     <ClInclude Include="coordinate.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="save.h" />
     <ClInclude Include="TCHAR2STRING.h" />
     <ClInclude Include="view.h" />
   </ItemGroup>
